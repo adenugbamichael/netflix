@@ -12,9 +12,9 @@ const Input: React.FC<InputProps> = ({ id, onChange, value, label, type }) => {
   return (
     <div className='relative'>
       <input
-        type={type}
         onChange={onChange}
         value={value}
+        type={type}
         id={id}
         className='
         block
