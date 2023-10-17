@@ -1,7 +1,30 @@
-import React from "react"
+import Navbar from "@/components/Navbar"
+import useCurrentUser from "@/hooks/useCurrentUser"
+import { NextPageContext } from "next"
+import { getSession, signOut } from "next-auth/react"
 
-const HomePage = () => {
-  return <div>Nextflix home page</div>
+export async function getServerSideProps(context: NextPageContext) {
+  const session = await getSession(context)
+
+  if (!session) {
+    return {
+      redirect: {
+        destination: "/auth",
+        permanent: false,
+      },
+    }
+  }
+
+  return {
+    props: {},
+  }
 }
 
-export default HomePage
+export default function Home() {
+  const { data: user } = useCurrentUser()
+  return (
+    <>
+      <Navbar />
+    </>
+  )
+}
